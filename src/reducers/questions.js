@@ -26,5 +26,7 @@ export default function questions(state = {}, action) {
                         : state[action.qid].optionTwo.votes.concat([action.authUser])
                 }
             }
+        default:
+            return state;
     }
 }
