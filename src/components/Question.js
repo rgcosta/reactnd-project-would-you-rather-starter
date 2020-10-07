@@ -5,7 +5,13 @@ class Question extends Component {
         return (
             <div className="card">
                 <div className="card-body">
-                    This is some text within a card body.
+                    <div>
+                        {this.props.question.optionOne.text}
+                    </div>
+                    or
+                    <div>
+                        {this.props.question.optionTwo.text}
+                    </div>
                 </div>
             </div>
         )
