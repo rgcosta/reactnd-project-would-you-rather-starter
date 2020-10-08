@@ -30,14 +30,14 @@ class Question extends Component {
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    { author + ' asks'}
+                    { author.name + ' asks'}
                 </div>
                 <div className="row no-gutters">
                     <div className="col-md-4">
                         <img
-                            src='https://tylermcginnis.com/would-you-rather/sarah.jpg'
+                            src={author.avatarURL}
                             className="img-fluid img-thumbnail rounded-circle"
-                            alt="AA"/>
+                            alt="Author Avatar"/>
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
@@ -143,7 +143,7 @@ class Question extends Component {
 Question.propTypes = {
     question: PropTypes.object.isRequired,
     hideOptions: PropTypes.bool,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.object.isRequired,
     isAnswered: PropTypes.bool.isRequired,
     authUser: PropTypes.string
 }
@@ -151,6 +151,6 @@ Question.propTypes = {
 export default connect((state, {question, hideOptions = false}) => ({
     authUser: state.authUser,
     hideOptions: hideOptions,
-    author: state.users[question.author].name,
+    author: state.users[question.author],
     isAnswered: question.optionOne.votes.includes(state.authUser) || question.optionTwo.votes.includes(state.authUser)
 }))(Question);
