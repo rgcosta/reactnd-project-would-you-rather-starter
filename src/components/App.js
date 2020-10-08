@@ -17,7 +17,7 @@ class App extends Component {
                     <div className="col-md-8">
                         <LoadingBar/>
                         <div>
-                            Hello World!
+                            Nav
                         </div>
                         {this.props.isLoading ? null : <Dashboard /> }
                     </div>
