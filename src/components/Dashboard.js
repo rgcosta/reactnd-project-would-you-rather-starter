@@ -60,7 +60,7 @@ class Dashboard extends Component {
                     <ul className="list-group list-group-flush">
                         { questions.map((question) => (
                             <li className="list-group-item" key={question.id}>
-                                <Question question={question} />
+                                <Question question={question} hideOptions={false} />
                             </li>
                         ))}
                     </ul>

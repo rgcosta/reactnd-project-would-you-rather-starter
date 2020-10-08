@@ -13,11 +13,15 @@ class App extends Component {
     render() {
         return (
             <div className='container'>
-                <LoadingBar/>
-                <div>
-                    Hello World!
+                <div className="row justify-content-md-center">
+                    <div className="col-md-8">
+                        <LoadingBar/>
+                        <div>
+                            Hello World!
+                        </div>
+                        {this.props.isLoading ? null : <Dashboard /> }
+                    </div>
                 </div>
-                {this.props.isLoading ? null : <Dashboard /> }
             </div>
         )
     }
