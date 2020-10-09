@@ -36,7 +36,6 @@ class Dashboard extends Component {
 
     render() {
         const { questions } = this.state;
-        console.log('questions', questions);
 
         return (
             <div className="card">

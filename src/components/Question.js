@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { NavLink } from "react-router-dom";
 
 class Question extends Component {
     state = {
@@ -20,7 +21,6 @@ class Question extends Component {
     }
 
     render() {
-        console.log('questionProps', this.props);
         const { question, hideOptions, author, isAnswered, authUser } = this.props;
         const votes = question.optionOne.votes.length + question.optionTwo.votes.length;
         const percentOptionOne = (question.optionOne.votes.length / votes)*100;
@@ -30,12 +30,12 @@ class Question extends Component {
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    { author.name + ' asks'}
+                    { author?.name || 'User' + ' asks'}
                 </div>
                 <div className="row no-gutters">
                     <div className="col-md-4">
                         <img
-                            src={author.avatarURL}
+                            src={author?.avatarURL || ''}
                             className="img-fluid img-thumbnail rounded-circle"
                             alt="Author Avatar"/>
                     </div>
@@ -47,11 +47,11 @@ class Question extends Component {
                                 (
                                     <div>
                                         <p className="card-text">{ this.state.shortText }</p>
-                                        <button
-                                            type="button"
+                                        <NavLink
+                                            to={`/question/${question.id}`}
                                             className="btn btn-outline-primary btn-block"
                                         >View Poll
-                                        </button>
+                                        </NavLink>
                                     </div>
                                 )
                             }
@@ -108,7 +108,7 @@ class Question extends Component {
                                         <div style={{marginTop: '30px'}}>
                                             <div className="form-check">
                                                 <input className="form-check-input" type="radio" name="exampleRadios"
-                                                       id="exampleRadios1" value="option1" checked/>
+                                                       id="exampleRadios1" value="option1" />
                                                 <label className="form-check-label" htmlFor="exampleRadios1">
                                                     { question.optionOne.text }
                                                 </label>
@@ -151,6 +151,6 @@ Question.propTypes = {
 export default connect((state, {question, hideOptions = false}) => ({
     authUser: state.authUser,
     hideOptions: hideOptions,
-    author: state.users[question.author],
+    author: !state.users[question.author] ? [] : state.users[question.author],
     isAnswered: question.optionOne.votes.includes(state.authUser) || question.optionTwo.votes.includes(state.authUser)
 }))(Question);

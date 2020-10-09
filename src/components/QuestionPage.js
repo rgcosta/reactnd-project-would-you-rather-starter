@@ -6,7 +6,7 @@ class QuestionPage extends Component {
 
     render() {
         return (
-            <Question question={this.props.question} />
+            this.props.question ? <Question question={this.props.question} /> : <div></div>
         );
     }
 }

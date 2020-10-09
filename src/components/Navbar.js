@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { NavLink } from "react-router-dom";
 
 class Navbar extends Component {
 
@@ -14,14 +15,27 @@ class Navbar extends Component {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Home</a>
+                        <li className="nav-item">
+                            <NavLink
+                                to='/'
+                                exact
+                                activeClassName='active'
+                                className="nav-link">Home
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">New Question</a>
+                            <NavLink
+                                to='/add'
+                                activeClassName='active'
+                                className="nav-link">New Question
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Leader Board</a>
+                            <NavLink
+                                to='/leaderboard'
+                                activeClassName='active'
+                                className="nav-link">Leader Board
+                            </NavLink>
                         </li>
                     </ul>
                     {
@@ -38,7 +52,7 @@ class Navbar extends Component {
                                 height="45"
                                 alt=""
                                 loading="lazy"/>
-                            <a className="nav-link text-secondary" href="#">Logout</a>
+                            <a className="nav-link text-secondary">Logout</a>
                         </form>
                     }
                 </div>
