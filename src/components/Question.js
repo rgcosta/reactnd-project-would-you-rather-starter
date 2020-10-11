@@ -30,7 +30,7 @@ class Question extends Component {
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    { author?.name || 'User' + ' asks'}
+                    { (author?.name || 'User') + ' asks'}
                 </div>
                 <div className="row no-gutters">
                     <div className="col-md-4">

@@ -1,8 +1,28 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { handleAddQuestion } from "../actions/questions";
+import { withRouter } from 'react-router-dom'
 
 class NewQuestion extends Component {
+    state = {
+        optionOneText: '',
+        optionTwoText: ''
+    }
+
+    addNewQuestion(e) {
+        e.preventDefault();
+        const { optionOneText, optionTwoText } = this.state;
+        const question = {
+            optionOneText,
+            optionTwoText
+        }
+
+        this.props.dispatch(handleAddQuestion(question, this.props.history));
+    }
 
     render() {
+        const isSubmitDisabled = !this.state.optionOneText || !this.state.optionTwoText;
+
         return (
             <div className="card">
                 <div className="card-header text-center">
@@ -10,14 +30,16 @@ class NewQuestion extends Component {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Would You Rather ...</h5>
-                    <form>
+                    <form onSubmit={(e) => this.addNewQuestion(e)}>
                         <div className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                id="exampleInputEmail1"
-                                aria-describedby="emailHelp"
                                 placeholder='Enter Option One Text Here'
+                                value={this.state.optionOneText}
+                                onChange={(e) => this.setState({
+                                    optionOneText: e.target.value
+                                })}
                             />
                             <small
                                 id="emailHelp"
@@ -28,11 +50,18 @@ class NewQuestion extends Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="exampleInputPassword1"
                                 placeholder='Enter Option Two Text Here'
+                                value={this.state.optionTwoText}
+                                onChange={(e) => this.setState({
+                                    optionTwoText: e.target.value
+                                })}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                        <button
+                            disabled={isSubmitDisabled}
+                            type="submit"
+                            className="btn btn-primary btn-block">Submit
+                        </button>
                     </form>
                 </div>
             </div>
@@ -40,4 +69,6 @@ class NewQuestion extends Component {
     }
 }
 
-export default NewQuestion;
+export default withRouter(connect((state) => ({
+    authUser: state.authUser
+}))(NewQuestion));
