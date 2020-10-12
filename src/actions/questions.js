@@ -3,7 +3,7 @@ import { showLoading, hideLoading } from "react-redux-loading";
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
-export const ANSWER_QUESTION = 'ADD_QUESTION';
+export const ANSWER_QUESTION = 'ANSWER_QUESTION';
 
 export function receiveQuestions(questions) {
     return {
@@ -32,5 +32,32 @@ export function handleAddQuestion({optionOneText, optionTwoText}, history) {
         }).then((question) => dispatch(addQuestion(question)))
             .then(() => dispatch(hideLoading()))
             .then(() => history.push('/'));
+    }
+}
+
+function answerQuestion(answer) {
+    return {
+        type: ANSWER_QUESTION,
+        answer
+    }
+}
+
+export function handleAnswerQuestion({authedUser, qid, answer}) {
+    return (dispatch) => {
+
+        const dispatchAnswer = {
+            qid,
+            authUser: authedUser,
+            optionAnswer: answer
+        }
+
+        dispatch(showLoading());
+
+        return API._saveQuestionAnswer({
+            answer,
+            qid,
+            authedUser
+        }).then(() => dispatch(answerQuestion(dispatchAnswer)))
+            .then(() => dispatch(hideLoading()));
     }
 }

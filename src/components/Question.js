@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
+import { handleAnswerQuestion } from "../actions/questions";
 
 class Question extends Component {
     state = {
@@ -18,6 +19,16 @@ class Question extends Component {
             shortText: this.props.question.optionOne.text.substr(0,8) + '... OR ' +
                 this.props.question.optionTwo.text.substr(0,8) + '...'
         })
+    }
+
+    submitAnswer(e){
+        e.preventDefault();
+        const answer = {
+            authedUser: this.props.authUser,
+            qid: this.props.question.id,
+            answer: this.state.selectedOption
+        }
+        this.props.dispatch(handleAnswerQuestion(answer));
     }
 
     render() {
@@ -107,16 +118,30 @@ class Question extends Component {
                                         !hideOptions &&
                                         <div style={{marginTop: '30px'}}>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="radio" name="exampleRadios"
-                                                       id="exampleRadios1" value="option1" />
-                                                <label className="form-check-label" htmlFor="exampleRadios1">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    value="optionOne"
+                                                    checked={this.state.selectedOption === 'optionOne'}
+                                                    onChange={(e) => this.setState({
+                                                        selectedOption: e.target.value
+                                                    })}
+                                                />
+                                                <label className="form-check-label">
                                                     { question.optionOne.text }
                                                 </label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="radio" name="exampleRadios"
-                                                       id="exampleRadios2" value="option2"/>
-                                                <label className="form-check-label" htmlFor="exampleRadios2">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    value="optionTwo"
+                                                    checked={this.state.selectedOption === 'optionTwo'}
+                                                    onChange={(e) => this.setState({
+                                                        selectedOption: e.target.value
+                                                    })}
+                                                />
+                                                <label className="form-check-label">
                                                     { question.optionTwo.text }
                                                 </label>
                                             </div>
@@ -125,6 +150,7 @@ class Question extends Component {
                                                     type="button"
                                                     className="btn btn-primary btn-block"
                                                     style={{marginTop: '30px'}}
+                                                    onClick={(e) => this.submitAnswer(e)}
                                                 >Submit
                                                 </button>
                                             </div>
