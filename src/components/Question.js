@@ -86,7 +86,7 @@ class Question extends Component {
                                                             style={{width: percentOptionOne + '%'}}
                                                             aria-valuenow={percentOptionOne}
                                                             aria-valuemin="0"
-                                                            aria-valuemax="100">{percentOptionOne}%
+                                                            aria-valuemax="100">{percentOptionOne.toFixed(2)}%
                                                         </div>
                                                     </div>
                                                     <p className='text-center'>{question.optionOne.votes.length} out of {votes}</p>
@@ -106,7 +106,7 @@ class Question extends Component {
                                                             style={{width: percentOptionTwo + '%'}}
                                                             aria-valuenow={percentOptionTwo}
                                                             aria-valuemin="0"
-                                                            aria-valuemax="100">{percentOptionTwo}%
+                                                            aria-valuemax="100">{percentOptionTwo.toFixed(2)}%
                                                         </div>
                                                     </div>
                                                     <p className='text-center'>{question.optionTwo.votes.length} out of {votes}</p>
