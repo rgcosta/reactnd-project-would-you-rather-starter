@@ -71,5 +71,5 @@ class Dashboard extends Component {
 
 export default connect((state) => ({
     authUser: state.authUser,
-    questions: Object.values(state.questions)
+    questions: Object.values(state.questions).sort((a,b) => b.timestamp - a.timestamp)
 }))(Dashboard);
