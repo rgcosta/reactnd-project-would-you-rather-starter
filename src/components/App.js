@@ -9,6 +9,7 @@ import NewQuestion from "./NewQuestion";
 import QuestionPage from "./QuestionPage";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
+import Leaderboard from "./Leaderboard";
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
                                         <Route path='/login' component={Login}/>
                                         <PrivateRoute path='/add' component={NewQuestion} />
                                         <PrivateRoute path='/question/:question_id' component={QuestionPage} />
+                                        <PrivateRoute path='/leaderboard' component={Leaderboard} />
                                     </div>
                                     }
                             </div>
