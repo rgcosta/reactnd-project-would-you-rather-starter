@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { unsetAuthUser } from "../actions/authUser";
 
 class Navbar extends Component {
+
+    logout() {
+        localStorage.clear();
+        this.props.dispatch(unsetAuthUser());
+        this.props.history.push('/');
+    }
 
     render() {
         return (
@@ -55,7 +61,7 @@ class Navbar extends Component {
                                 loading="lazy"/>
                             <a
                                 style={{cursor: "pointer"}}
-                                onClick={() => this.props.dispatch(unsetAuthUser())}
+                                onClick={() => this.logout()}
                                 className="nav-link text-secondary"
                             >Logout
                             </a>
@@ -67,7 +73,7 @@ class Navbar extends Component {
     }
 }
 
-export default connect((state) => ({
+export default withRouter(connect((state) => ({
     authUser: state.authUser,
     userObj: state.users[state.authUser]
-}))(Navbar);
+}))(Navbar));

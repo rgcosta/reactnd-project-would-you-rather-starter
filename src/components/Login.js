@@ -5,8 +5,15 @@ import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
 
+    componentDidMount() {
+        this.setState({
+            selectedUser: this.props.users[0]?.id
+        })
+    }
+
     login(e) {
         e.preventDefault();
+        localStorage.setItem('token', this.state.selectedUser);
         this.props.dispatch(setAuthUser(this.state.selectedUser));
     }
 

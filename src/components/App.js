@@ -4,10 +4,11 @@ import { handleInitialLoad } from "../actions/initialLoad";
 import Dashboard from "./Dashboard";
 import LoadingBar from 'react-redux-loading'
 import Navbar from "./Navbar";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import NewQuestion from "./NewQuestion";
 import QuestionPage from "./QuestionPage";
 import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 
 class App extends Component {
 
@@ -27,10 +28,10 @@ class App extends Component {
                                 {this.props.isLoading
                                     ? null
                                     : <div>
-                                        <Route exact path='/' component={Dashboard}/>
+                                        <PrivateRoute exact path='/' component={Dashboard} />
                                         <Route path='/login' component={Login}/>
-                                        <Route path='/add' component={NewQuestion}/>
-                                        <Route path='/question/:question_id' component={QuestionPage}/>
+                                        <PrivateRoute path='/add' component={NewQuestion} />
+                                        <PrivateRoute path='/question/:question_id' component={QuestionPage} />
                                     </div>
                                     }
                             </div>
