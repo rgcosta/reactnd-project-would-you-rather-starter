@@ -48,7 +48,7 @@ class Navbar extends Component {
                             <img
                                 className='rounded-circle'
                                 style={{marginLeft: '5px', marginRight: '5px'}}
-                                src="https://tylermcginnis.com/would-you-rather/sarah.jpg"
+                                src={this.props.userObj.avatarURL}
                                 width="45"
                                 height="45"
                                 alt=""

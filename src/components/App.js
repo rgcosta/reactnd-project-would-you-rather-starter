@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NewQuestion from "./NewQuestion";
 import QuestionPage from "./QuestionPage";
+import Login from "./Login";
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
                                     ? null
                                     : <div>
                                         <Route exact path='/' component={Dashboard}/>
+                                        <Route path='/login' component={Login}/>
                                         <Route path='/add' component={NewQuestion}/>
                                         <Route path='/question/:question_id' component={QuestionPage}/>
                                     </div>
