@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
+import { unsetAuthUser } from "../actions/authUser";
 
 class Navbar extends Component {
 
@@ -52,7 +53,12 @@ class Navbar extends Component {
                                 height="45"
                                 alt=""
                                 loading="lazy"/>
-                            <a className="nav-link text-secondary">Logout</a>
+                            <a
+                                style={{cursor: "pointer"}}
+                                onClick={() => this.props.dispatch(unsetAuthUser())}
+                                className="nav-link text-secondary"
+                            >Logout
+                            </a>
                         </form>
                     }
                 </div>

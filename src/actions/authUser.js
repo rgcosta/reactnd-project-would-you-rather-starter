@@ -7,3 +7,9 @@ export function setAuthUser(id) {
         id
     }
 }
+
+export function unsetAuthUser() {
+    return {
+        type: UNSET_AUTH_USER
+    }
+}
